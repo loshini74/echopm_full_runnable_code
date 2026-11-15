@@ -55,9 +55,26 @@ st.markdown("""
         border-radius: 10px;
         padding: 12px 20px;
         display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 16px;
+    }
+    .top-banner > div {
+        flex: 1 1 340px;
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+    .top-banner > div:last-child {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 8px;
+    }
+    .top-banner .cal-badge {
+        white-space: normal;
     }
     .cal-badge {
         background-color: #1B4332;
@@ -73,7 +90,8 @@ st.markdown("""
         border: 1px solid #2D333B;
         border-radius: 10px;
         padding: 16px 20px;
-        height: 215px;
+        min-height: 215px;
+        height: auto;
     }
     .novelty-card-warn {
         background: linear-gradient(135deg, #3A1D1D 0%, #1B2026 75%);
@@ -81,7 +99,8 @@ st.markdown("""
         border-left: 5px solid #E05252;
         border-radius: 10px;
         padding: 16px 20px;
-        height: 215px;
+        min-height: 215px;
+        height: auto;
     }
     .novelty-card-ok {
         background: linear-gradient(135deg, #163325 0%, #1B2026 75%);
@@ -89,7 +108,8 @@ st.markdown("""
         border-left: 5px solid #40C057;
         border-radius: 10px;
         padding: 16px 20px;
-        height: 215px;
+        min-height: 215px;
+        height: auto;
     }
     .card-title {
         color: #ADB5BD;
@@ -317,7 +337,7 @@ with c3:
 
 # Row 2: 2. Real-time Telemetry (IoT Signals)
 st.markdown("#### 2. Real-time Telemetry (IoT Signals)")
-g1, g2, g3, g4, g5, g6 = st.columns(6)
+g1, g2, g3 = st.columns(3)
 
 with g1:
     vib_col = "#F59F00" if latest["vibration_rms"] > 2.2 else "#40C057"
@@ -333,6 +353,8 @@ with g3:
     cur_col = "#FA5252" if latest["current_rms"] > 4.0 else "#40C057"
     cur_st = "Elevated" if latest["current_rms"] > 4.0 else "Normal"
     make_gauge_card("Motor Current", latest["current_rms"], "A", 0, 7.0, 4.0, cur_st, cur_col, history_df["current_rms"])
+
+g4, g5, g6 = st.columns(3)
 
 with g4:
     make_gauge_card("Power Consumption", latest["power_kw"], "kW", 0, 2.0, 1.3, "Active Load", "#339AF0", history_df["power_kw"])
