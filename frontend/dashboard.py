@@ -1,5 +1,5 @@
 """
-EchoPM — Predictive Maintenance & Utility Dashboard (PS 03)
+EchoPM — Predictive Maintenance & Utility Dashboard
 Matches the exact dark-mode industrial UI mockup:
 - Top Header Bar with Asset ID & 100% Adaptive Calibration Badge
 - Left Sidebar: System Config, Model Selector, Phase Mode (1-Phase / 3-Phase), Calibration Progress, Signal Quick-Toggles & Live Fault Simulator
@@ -58,16 +58,6 @@ st.markdown("""
         justify-content: space-between;
         align-items: center;
         margin-bottom: 16px;
-    }
-    .ps-badge {
-        background-color: #3D3522;
-        color: #F2CC60;
-        border: 1px solid #6E5A28;
-        padding: 4px 12px;
-        border-radius: 16px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        margin-left: 12px;
     }
     .cal-badge {
         background-color: #1B4332;
@@ -256,7 +246,6 @@ st.markdown(f"""
 <div class="top-banner">
     <div>
         <span style="font-size:1.35rem; font-weight:700; color:#FFFFFF;">📊 EchoPM — Predictive Maintenance & Utility Dashboard</span>
-        <span class="ps-badge">PS 03</span>
     </div>
     <div>
         <span style="color:#ADB5BD; margin-right:16px; font-size:0.92rem;">
