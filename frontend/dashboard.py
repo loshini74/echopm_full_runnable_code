@@ -90,8 +90,10 @@ st.markdown("""
         border: 1px solid #2D333B;
         border-radius: 10px;
         padding: 16px 20px;
-        min-height: 215px;
-        height: auto;
+        box-sizing: border-box;
+        height: 290px;
+        overflow-y: auto;
+        overflow-wrap: anywhere;
     }
     .novelty-card-warn {
         background: linear-gradient(135deg, #3A1D1D 0%, #1B2026 75%);
@@ -99,8 +101,10 @@ st.markdown("""
         border-left: 5px solid #E05252;
         border-radius: 10px;
         padding: 16px 20px;
-        min-height: 215px;
-        height: auto;
+        box-sizing: border-box;
+        height: 290px;
+        overflow-y: auto;
+        overflow-wrap: anywhere;
     }
     .novelty-card-ok {
         background: linear-gradient(135deg, #163325 0%, #1B2026 75%);
@@ -108,14 +112,27 @@ st.markdown("""
         border-left: 5px solid #40C057;
         border-radius: 10px;
         padding: 16px 20px;
-        min-height: 215px;
-        height: auto;
+        box-sizing: border-box;
+        height: 290px;
+        overflow-y: auto;
+        overflow-wrap: anywhere;
     }
     .card-title {
         color: #ADB5BD;
         font-size: 0.95rem;
         font-weight: 600;
         margin-bottom: 8px;
+    }
+    .novelty-heading {
+        color: #ADB5BD;
+        font-size: 1.05rem;
+        font-weight: 700;
+        line-height: 1.3;
+        margin-bottom: 10px;
+    }
+    .novelty-body {
+        font-size: 0.9rem;
+        line-height: 1.45;
     }
     .unknown-banner {
         background-color: #332B14;
@@ -288,14 +305,14 @@ conf_label = "High" if latest["confidence_pct"] >= 80 else ("Moderate" if latest
 with c1:
     st.markdown(f"""
     <div class="{card_css}">
-        <div class="card-title">Asset Condition Card</div>
-        <div style="font-size:1.35rem; font-weight:700; color:{title_color}; line-height:1.25; margin-bottom:10px;">
+        <div class="novelty-heading">Asset Condition Card</div>
+        <div class="novelty-body" style="font-weight:700; color:{title_color}; margin-bottom:10px;">
             ● {guidance['status_badge']}
         </div>
-        <div style="font-size:0.95rem; color:#E9ECEF;">
+        <div class="novelty-body" style="color:#E9ECEF;">
             Health Score: <b>{latest['health_score']} / 100</b> &nbsp;|&nbsp; Classifier: <b>{latest['confidence_pct']}%</b>
         </div>
-        <div style="font-size:0.9rem; color:#ADB5BD; margin-top:6px;">
+        <div class="novelty-body" style="color:#ADB5BD; margin-top:6px;">
             Confidence: <span style="color:#51CF66; font-weight:600;">{conf_label}</span>
             &nbsp;•&nbsp; Utility: <b>{latest['specific_energy_whl']} Wh/L</b>
         </div>
@@ -306,14 +323,14 @@ with c2:
     runway_color = "#51CF66" if is_healthy else "#F59F00"
     st.markdown(f"""
     <div class="novelty-card" style="text-align:center;">
-        <div class="card-title" style="text-align:left;">Safe Operating Runway Card</div>
-        <div style="font-size:1.85rem; font-weight:800; color:{runway_color}; margin-top:18px; margin-bottom:8px;">
+        <div class="novelty-heading" style="text-align:left;">Safe Operating Runway Card</div>
+        <div class="novelty-body" style="font-weight:800; color:{runway_color}; margin-top:12px; margin-bottom:8px;">
             ⏳ ~{guidance['runway_days']} DAYS REMAINING
         </div>
-        <div style="font-size:0.9rem; color:#ADB5BD;">
+        <div class="novelty-body" style="color:#ADB5BD;">
             Schedule maintenance before critical failure
         </div>
-        <div style="font-size:0.82rem; color:#868E96; margin-top:12px;">
+        <div class="novelty-body" style="color:#868E96; margin-top:12px;">
             Phase Imbalance: {latest['current_imbalance_pct']}% &nbsp;|&nbsp; Grid Dev: {latest['voltage_dev_pct']}%
         </div>
     </div>
@@ -322,11 +339,11 @@ with c2:
 with c3:
     st.markdown(f"""
     <div class="novelty-card">
-        <div class="card-title">Estimated Repair Budget (Local Market Rate)</div>
-        <div style="font-size:1.75rem; font-weight:800; color:#40C057; text-align:center; margin-bottom:8px;">
+        <div class="novelty-heading">Estimated Repair Budget (Local Market Rate)</div>
+        <div class="novelty-body" style="font-weight:800; color:#40C057; text-align:center; margin-bottom:8px;">
             {guidance['budget_range']}
         </div>
-        <ul style="font-size:0.84rem; color:#DEE2E6; margin:0; padding-left:18px; line-height:1.48;">
+        <ul class="novelty-body" style="color:#DEE2E6; margin:0; padding-left:18px;">
             <li><b>Spare Parts:</b> <span style="color:#FCC419;">{guidance['spare_parts']}</span></li>
             <li><b>Service & Labour:</b> <span style="color:#FCC419;">{guidance['labour_cost']}</span></li>
             <li><b>Delay Penalty:</b> <span style="color:#FF8787;">{guidance['delay_penalty']}</span></li>
@@ -429,7 +446,7 @@ with b3:
         title={"text": "Vibration vs. Power Consumption & Utility", "font": {"size": 14, "color": "#CED4DA"}},
         paper_bgcolor="#1B2026",
         plot_bgcolor="#14181C",
-        height=205,
+        height=250,
         margin=dict(l=10, r=10, t=36, b=10),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(size=10, color="#CED4DA")),
         xaxis=dict(showgrid=False, color="#868E96"),
