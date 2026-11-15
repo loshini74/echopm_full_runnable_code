@@ -423,32 +423,32 @@ with b3:
     x_vals = list(range(len(history_df)))
     if show_vib:
         fig_trend.add_trace(
-            go.Scatter(x=x_vals, y=history_df["vibration_rms"], name="Vibration (g)", line=dict(color="#FCC419", width=2)),
+            go.Scatter(x=x_vals, y=history_df["vibration_rms"], name="Vibration", line=dict(color="#FCC419", width=2)),
             secondary_y=False
         )
     if show_pwr:
         fig_trend.add_trace(
-            go.Scatter(x=x_vals, y=history_df["power_kw"] * 1000.0, name="Power (W)", line=dict(color="#4DABF7", width=2)),
+            go.Scatter(x=x_vals, y=history_df["power_kw"] * 1000.0, name="Power", line=dict(color="#4DABF7", width=2)),
             secondary_y=True
         )
     if show_flow:
         fig_trend.add_trace(
-            go.Scatter(x=x_vals, y=history_df["water_flow_lpm"], name="Flow (L/min)", line=dict(color="#51CF66", width=1.5, dash="dot")),
+            go.Scatter(x=x_vals, y=history_df["water_flow_lpm"], name="Flow", line=dict(color="#51CF66", width=1.5, dash="dot")),
             secondary_y=False
         )
     if show_press:
         fig_trend.add_trace(
-            go.Scatter(x=x_vals, y=history_df["outlet_pressure_bar"], name="Pressure (Bar)", line=dict(color="#FF8787", width=1.5)),
+            go.Scatter(x=x_vals, y=history_df["outlet_pressure_bar"], name="Pressure", line=dict(color="#FF8787", width=1.5)),
             secondary_y=False
         )
 
     fig_trend.update_layout(
-        title={"text": "Vibration vs. Power Consumption & Utility", "font": {"size": 14, "color": "#CED4DA"}},
+        title={"text": "Telemetry Trend", "font": {"size": 13, "color": "#CED4DA"}, "x": 0.02, "y": 1.2, "xanchor": "left"},
         paper_bgcolor="#1B2026",
         plot_bgcolor="#14181C",
-        height=250,
-        margin=dict(l=10, r=10, t=36, b=10),
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(size=10, color="#CED4DA")),
+        height=280,
+        margin=dict(l=10, r=10, t=90, b=10),
+        legend=dict(orientation="h", yanchor="bottom", y=1.03, xanchor="left", x=0, font=dict(size=9, color="#CED4DA")),
         xaxis=dict(showgrid=False, color="#868E96"),
         yaxis=dict(showgrid=True, gridcolor="#252A30", color="#FCC419"),
         yaxis2=dict(showgrid=False, color="#4DABF7")
