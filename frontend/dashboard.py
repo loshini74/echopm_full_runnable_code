@@ -257,7 +257,7 @@ with st.sidebar:
     show_pwr = st.checkbox("Power Consumption", value=True)
     show_flow = st.checkbox("Water Flow", value=True)
     show_press = st.checkbox("Outlet Pressure", value=False)
-    auto_refresh = st.checkbox("Live Auto-Refresh (3s)", value=True)
+    auto_refresh = st.checkbox("Live Auto-Refresh (3s)", value=False)
 
 # Fetch live backend state
 try:
