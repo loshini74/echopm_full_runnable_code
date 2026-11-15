@@ -9,6 +9,7 @@ EchoPM — Backend Inference, Calibration, Runway & BER Cost Engine (PS 03)
 import os
 import sys
 import json
+import hmac
 import time
 import sqlite3
 import threading
@@ -48,7 +49,8 @@ FEATURE_COLS = [
 ]
 
 NEW_MOTOR_REPLACEMENT_COST = 4500  # INR benchmark for 1HP / Closed-Loop Pump Motor
-API_PORT = int(os.environ.get("ECHOPM_PORT", "5001"))
+API_PORT = int(os.environ.get("PORT") or os.environ.get("ECHOPM_PORT", "5001"))
+API_KEY = os.environ.get("ECHOPM_API_KEY")
 
 # Realistic Indian Market Cost & Guided Repair Lookup (Spare Parts + Tiered Labour)
 REPAIR_KNOWLEDGE_BASE = {
@@ -191,6 +193,13 @@ REPAIR_KNOWLEDGE_BASE = {
 
 app = Flask(__name__)
 CORS(app)
+
+@app.before_request
+def authenticate_api_request():
+    if request.path.startswith("/api/v1/") and API_KEY:
+        supplied_key = request.headers.get("X-API-Key", "")
+        if not hmac.compare_digest(supplied_key, API_KEY):
+            return jsonify({"error": "Unauthorized"}), 401
 
 # Shared Live State
 SYSTEM_STATE = {
@@ -378,6 +387,10 @@ except Exception as e:
     print(f"MQTT offline fallback mode active: {e}")
 
 # REST API Endpoints
+@app.route("/health", methods=["GET"])
+def health_check():
+    return jsonify({"status": "ok"})
+
 @app.route("/api/v1/dashboard", methods=["GET"])
 def get_dashboard_data():
     conn = sqlite3.connect(DB_PATH)

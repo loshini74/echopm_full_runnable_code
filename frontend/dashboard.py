@@ -24,7 +24,17 @@ st.set_page_config(
 )
 
 API_PORT = os.environ.get("ECHOPM_PORT", "5001")
-API_BASE = f"http://localhost:{API_PORT}/api/v1"
+API_HOSTPORT = os.environ.get("ECHOPM_API_HOSTPORT")
+API_BASE = (
+    f"http://{API_HOSTPORT}/api/v1"
+    if API_HOSTPORT
+    else os.environ.get(
+        "ECHOPM_API_BASE_URL",
+        f"http://localhost:{API_PORT}/api/v1"
+    ).rstrip("/")
+)
+API_KEY = os.environ.get("ECHOPM_API_KEY")
+API_HEADERS = {"X-API-Key": API_KEY} if API_KEY else {}
 
 # Custom Dark-Mode Industrial Styling matching the mockup
 st.markdown("""
@@ -116,9 +126,15 @@ st.markdown("""
 
 def post_control(payload):
     try:
-        requests.post(f"{API_BASE}/control", json=payload, timeout=1.5)
-    except Exception:
-        pass
+        response = requests.post(
+            f"{API_BASE}/control",
+            json=payload,
+            headers=API_HEADERS,
+            timeout=1.5
+        )
+        response.raise_for_status()
+    except requests.RequestException as e:
+        st.error(f"Control request failed. Check the backend connection and API key. Details: {e}")
 
 def make_gauge_card(title, value, unit, min_val, max_val, warn_thresh, status_text, status_color, spark_series):
     fig = go.Figure(go.Indicator(
@@ -216,7 +232,7 @@ with st.sidebar:
 
 # Fetch live backend state
 try:
-    resp = requests.get(f"{API_BASE}/dashboard", timeout=2.0)
+    resp = requests.get(f"{API_BASE}/dashboard", headers=API_HEADERS, timeout=2.0)
     resp.raise_for_status()
     payload = resp.json()
 except requests.exceptions.JSONDecodeError as e:

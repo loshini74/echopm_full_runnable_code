@@ -23,3 +23,13 @@ Complete, runnable end-to-end software package featuring:
    ```bash
    streamlit run frontend/dashboard.py
    ```
+
+## Public Deployment (Render)
+
+The `render.yaml` Blueprint creates a Flask API service and a Streamlit dashboard service. To deploy:
+
+1. In Render, create a new Blueprint from this GitHub repository and approve access to the private repo.
+2. Deploy both services. The Blueprint generates a shared API key and connects the dashboard to the backend over Render's private network.
+3. Open the public URL shown for the `echopm-dashboard` service.
+
+The free plan may spin down after inactivity, and its local SQLite database/model artifacts are ephemeral. Telemetry history can reset after a restart.
