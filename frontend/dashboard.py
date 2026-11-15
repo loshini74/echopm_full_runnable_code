@@ -3,7 +3,7 @@ EchoPM — Predictive Maintenance & Utility Dashboard
 Matches the exact dark-mode industrial UI mockup:
 - Top Header Bar with Asset ID & 100% Adaptive Calibration Badge
 - Left Sidebar: System Config, Model Selector, Phase Mode (1-Phase / 3-Phase), Calibration Progress, Signal Quick-Toggles & Live Fault Simulator
-- Row 1 (Novelty Cards): Asset Condition Card, Safe Operating Runway Card, Estimated Repair Budget (Spare Parts + Tiered Labour + BER Feasibility + Delay Penalty)
+- Row 1 (Novelty Cards): Asset Condition Card, Safe Operating Runway Card, Estimated Repair Budget (Spare Parts + Tiered Labour + Delay Penalty)
 - Row 2 (Real-time Telemetry): 6 Color-Coded Gauge Cards with Sparklines (Vibration RMS, Temperature, Motor Current, Power Consumption, Water Flow, Outlet Pressure)
 - Row 3 (AI Diagnostics & Repair Guidance): Recommended Way of Repair Checklist, Unknown Fault Workshop Fallback Alert, and Dual-Axis Vibration vs. Power Consumption Chart
 """
@@ -329,7 +329,6 @@ with c3:
         <ul style="font-size:0.84rem; color:#DEE2E6; margin:0; padding-left:18px; line-height:1.48;">
             <li><b>Spare Parts:</b> <span style="color:#FCC419;">{guidance['spare_parts']}</span></li>
             <li><b>Service & Labour:</b> <span style="color:#FCC419;">{guidance['labour_cost']}</span></li>
-            <li><b>BER Feasibility:</b> <span style="color:#51CF66; font-weight:600;">{guidance['ber_verdict']}</span></li>
             <li><b>Delay Penalty:</b> <span style="color:#FF8787;">{guidance['delay_penalty']}</span></li>
         </ul>
     </div>
