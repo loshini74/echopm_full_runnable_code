@@ -343,10 +343,10 @@ with c3:
         <div class="novelty-body" style="font-weight:800; color:#40C057; text-align:center; margin-bottom:8px;">
             {guidance['budget_range']}
         </div>
-        <ul class="novelty-body" style="color:#DEE2E6; margin:0; padding-left:18px;">
-            <li><b>Spare Parts:</b> <span style="color:#FCC419;">{guidance['spare_parts']}</span></li>
-            <li><b>Service & Labour:</b> <span style="color:#FCC419;">{guidance['labour_cost']}</span></li>
-            <li><b>Delay Penalty:</b> <span style="color:#FF8787;">{guidance['delay_penalty']}</span></li>
+        <ul class="novelty-body" style="color:#FFFFFF; margin:0; padding-left:18px;">
+            <li><b>Spare Parts:</b> <span style="color:#FFFFFF;">{guidance['spare_parts']}</span></li>
+            <li><b>Service & Labour:</b> <span style="color:#FFFFFF;">{guidance['labour_cost']}</span></li>
+            <li><b style="color:#FF8787;">Delay Penalty:</b> <span style="color:#FF8787;">{guidance['delay_penalty']}</span></li>
         </ul>
     </div>
     """, unsafe_allow_html=True)
