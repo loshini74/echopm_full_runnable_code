@@ -419,6 +419,7 @@ with b2:
     """, unsafe_allow_html=True)
 
 with b3:
+    st.markdown("**Telemetry Trend**")
     fig_trend = make_subplots(specs=[[{"secondary_y": True}]])
     x_vals = list(range(len(history_df)))
     if show_vib:
@@ -443,12 +444,11 @@ with b3:
         )
 
     fig_trend.update_layout(
-        title={"text": "Telemetry Trend", "font": {"size": 13, "color": "#CED4DA"}, "x": 0.02, "y": 1.2, "xanchor": "left"},
         paper_bgcolor="#1B2026",
         plot_bgcolor="#14181C",
         height=280,
-        margin=dict(l=10, r=10, t=90, b=10),
-        legend=dict(orientation="h", yanchor="bottom", y=1.03, xanchor="left", x=0, font=dict(size=9, color="#CED4DA")),
+        margin=dict(l=10, r=10, t=55, b=10),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0, font=dict(size=9, color="#CED4DA")),
         xaxis=dict(showgrid=False, color="#868E96"),
         yaxis=dict(showgrid=True, gridcolor="#252A30", color="#FCC419"),
         yaxis2=dict(showgrid=False, color="#4DABF7")
