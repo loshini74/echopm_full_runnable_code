@@ -4,35 +4,37 @@ envVarGroups:
       - key: ECHOPM_API_KEY
         generateValue: true
 
-services:
-  - type: web
-    name: echopm-api
-    runtime: python
-    plan: free
-    region: singapore
-    buildCommand: pip install -r requirements.txt
-    startCommand: python backend/app.py
-    healthCheckPath: /health
-    envVarGroups:
-      - name: echopm-api-key
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.12.8
+projects:
+  - name: echopm
+    environments:
+      - name: production
+        envVarGroups:
+          - name: echopm-api-key
+        services:
+          - type: web
+            name: echopm-api
+            runtime: python
+            plan: free
+            region: singapore
+            buildCommand: pip install -r requirements.txt
+            startCommand: python backend/app.py
+            healthCheckPath: /health
+            envVars:
+              - key: PYTHON_VERSION
+                value: 3.12.8
 
-  - type: web
-    name: echopm-dashboard
-    runtime: python
-    plan: free
-    region: singapore
-    buildCommand: pip install -r requirements.txt
-    startCommand: streamlit run frontend/dashboard.py --server.address 0.0.0.0 --server.port $PORT --server.headless true
-    envVarGroups:
-      - name: echopm-api-key
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.12.8
-      - key: ECHOPM_API_HOSTPORT
-        fromService:
-          type: web
-          name: echopm-api
-          property: hostport
+          - type: web
+            name: echopm-dashboard
+            runtime: python
+            plan: free
+            region: singapore
+            buildCommand: pip install -r requirements.txt
+            startCommand: streamlit run frontend/dashboard.py --server.address 0.0.0.0 --server.port $PORT --server.headless true
+            envVars:
+              - key: PYTHON_VERSION
+                value: 3.12.8
+              - key: ECHOPM_API_HOSTPORT
+                fromService:
+                  type: web
+                  name: echopm-api
+                  property: hostport
