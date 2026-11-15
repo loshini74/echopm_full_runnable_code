@@ -1,5 +1,5 @@
 """
-EchoPM — Predictive Maintenance & Utility Dashboard (PS 03 | iTech IDEAthon 2027)
+EchoPM — Predictive Maintenance & Utility Dashboard (PS 03)
 Matches the exact dark-mode industrial UI mockup:
 - Top Header Bar with Asset ID & 100% Adaptive Calibration Badge
 - Left Sidebar: System Config, Model Selector, Phase Mode (1-Phase / 3-Phase), Calibration Progress, Signal Quick-Toggles & Live Fault Simulator
@@ -256,7 +256,7 @@ st.markdown(f"""
 <div class="top-banner">
     <div>
         <span style="font-size:1.35rem; font-weight:700; color:#FFFFFF;">📊 EchoPM — Predictive Maintenance & Utility Dashboard</span>
-        <span class="ps-badge">PS 03 | iTech IDEAthon 2027</span>
+        <span class="ps-badge">PS 03</span>
     </div>
     <div>
         <span style="color:#ADB5BD; margin-right:16px; font-size:0.92rem;">
