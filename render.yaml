@@ -30,8 +30,5 @@ projects:
             envVars:
               - key: PYTHON_VERSION
                 value: 3.12.8
-              - key: ECHOPM_API_HOSTPORT
-                fromService:
-                  type: web
-                  name: echopm-api
-                  property: hostport
+              - key: ECHOPM_API_BASE_URL
+                value: https://echopm-api.onrender.com/api/v1
