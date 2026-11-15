@@ -1,15 +1,12 @@
-envVarGroups:
-  - name: echopm-api-key
-    envVars:
-      - key: ECHOPM_API_KEY
-        generateValue: true
-
 projects:
   - name: echopm
     environments:
       - name: production
         envVarGroups:
           - name: echopm-api-key
+            envVars:
+              - key: ECHOPM_API_KEY
+                generateValue: true
         services:
           - type: web
             name: echopm-api
