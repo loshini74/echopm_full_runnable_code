@@ -24,14 +24,16 @@ st.set_page_config(
 )
 
 API_PORT = os.environ.get("ECHOPM_PORT", "5001")
+API_BASE_URL = os.environ.get("ECHOPM_API_BASE_URL")
 API_HOSTPORT = os.environ.get("ECHOPM_API_HOSTPORT")
 API_BASE = (
-    f"http://{API_HOSTPORT}/api/v1"
-    if API_HOSTPORT
-    else os.environ.get(
-        "ECHOPM_API_BASE_URL",
-        f"http://localhost:{API_PORT}/api/v1"
-    ).rstrip("/")
+    API_BASE_URL.rstrip("/")
+    if API_BASE_URL
+    else (
+        f"http://{API_HOSTPORT}/api/v1"
+        if API_HOSTPORT
+        else f"http://localhost:{API_PORT}/api/v1"
+    )
 )
 API_KEY = os.environ.get("ECHOPM_API_KEY")
 API_HEADERS = {"X-API-Key": API_KEY} if API_KEY else {}
